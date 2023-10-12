@@ -5,24 +5,22 @@ import Grid from '@mui/material/Grid'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
 // ** Demo Components Imports
-import FormLayoutsBasic from 'src/views/form-layouts/FormLayoutsBasic'
-import FormLayoutsIcons from 'src/views/form-layouts/FormLayoutsIcons'
-import FormLayoutsSeparator from 'src/views/form-layouts/FormLayoutsSeparator'
-import FormLayoutsAlignment from 'src/views/form-layouts/FormLayoutsAlignment'
+
+import ProductDetailLayout from 'src/views/form-layouts/ProductDetailLayout'
 
 // ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
 
-const UserDetail = () => {
+const ProductDetail = () => {
   return (
     <DatePickerWrapper>
       <Grid container spacing={6}>
         <Grid item xs={12}>
-          <FormLayoutsSeparator />
+          <ProductDetailLayout />
         </Grid>
       </Grid>
     </DatePickerWrapper>
   )
 }
 
-export default UserDetail
+export default ProductDetail

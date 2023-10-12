@@ -31,6 +31,11 @@ const navigation = () => {
       path: '/userrecords'
     },
     {
+      title: 'Products record',
+      icon: CreditCardOutline,
+      path: '/products-record'
+    },
+    {
       title: 'Cards',
       icon: CreditCardOutline,
       path: '/cards'
@@ -42,8 +47,13 @@ const navigation = () => {
     },
     {
       icon: CubeOutline,
-      title: 'Form Layouts',
+      title: 'New Registration',
       path: '/form-layouts'
+    },
+    {
+      icon: CubeOutline,
+      title: 'Product Detail',
+      path: '/product-detail'
     }
   ]
 }
