@@ -10,6 +10,10 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
+import Button from '@mui/material/Button'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import Box from '@mui/material/Box'
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170 },
@@ -35,12 +39,6 @@ const columns = [
   {
     id: 'motortype',
     label: 'motor type',
-    minWidth: 170,
-    align: 'right'
-  },
-  {
-    id: 'userdetail',
-    label: 'user detail',
     minWidth: 170,
     align: 'right'
   }
@@ -84,6 +82,7 @@ const TableStickyHeader = () => {
                   {column.label}
                 </TableCell>
               ))}
+              <TableCell>Achghgh</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -99,6 +98,16 @@ const TableStickyHeader = () => {
                       </TableCell>
                     )
                   })}
+                  <TableCell>
+                    <Box sx={{ display: 'flex' }}>
+                      <Button>
+                        <DeleteForeverIcon />
+                      </Button>
+                      <Button>
+                        <EditIcon />
+                      </Button>
+                    </Box>
+                  </TableCell>
                 </TableRow>
               )
             })}

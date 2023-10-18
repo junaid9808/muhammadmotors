@@ -26,12 +26,12 @@ const Dashboard = () => {
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>
-        <Grid item xs={12} md={4}>
+        {/* <Grid item xs={12} md={4}>
           <Trophy />
         </Grid>
         <Grid item xs={12} md={8}>
           <StatisticsCard />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} md={6} lg={4}>
           <WeeklyOverview />
         </Grid>
@@ -40,7 +40,7 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Grid container spacing={6}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6} lg={12}>
               <CardStatisticsVerticalComponent
                 stats='$25.6k'
                 icon={<Poll />}
@@ -50,7 +50,7 @@ const Dashboard = () => {
                 subtitle='Weekly Profit'
               />
             </Grid>
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
               <CardStatisticsVerticalComponent
                 stats='$78'
                 title='Refunds'
@@ -81,18 +81,18 @@ const Dashboard = () => {
                 title='Sales Queries'
                 icon={<HelpCircleOutline />}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
+        {/* <Grid item xs={12} md={6} lg={4}>
           <SalesByCountries />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} md={12} lg={8}>
           <DepositWithdraw />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Table />
-        </Grid>
+        </Grid> */}
       </Grid>
     </ApexChartWrapper>
   )

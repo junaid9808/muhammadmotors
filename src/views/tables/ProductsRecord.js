@@ -2,117 +2,84 @@
 import { useState } from 'react'
 
 // ** MUI Imports
-import Paper from '@mui/material/Paper'
-import Table from '@mui/material/Table'
-import TableRow from '@mui/material/TableRow'
-import TableHead from '@mui/material/TableHead'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TablePagination from '@mui/material/TablePagination'
-
-const columns = [
-  { id: 'producttype', label: 'Product type', minWidth: 170 },
-  { id: 'price', label: 'Price.', minWidth: 100 },
-  {
-    id: 'model',
-    label: 'Model',
-    minWidth: 170,
-    align: 'right'
-  },
-  {
-    id: 'pruchasedate',
-    label: 'pruchase Date',
-    minWidth: 170,
-    align: 'right'
-  },
-  {
-    id: 'engineno',
-    label: 'Engine No.',
-    minWidth: 170,
-    align: 'right'
-  },
-  {
-    id: 'frameno',
-    label: 'Frame No.',
-    minWidth: 170,
-    align: 'right'
-  },
-  {
-    id: 'chassieno',
-    label: 'Chassie No.',
-    minWidth: 170,
-    align: 'right'
-  }
-]
-function createData(producttype, price, model, pruchasedate, engineno, frameno, chassieno) {
-  return { producttype, price, model, pruchasedate, engineno, frameno, chassieno }
-}
-
-const rows = [
-  createData('motor cycle', '1000000', 2023, 11 / 11 / 2023, 23455, 43453, 54545),
-  createData('Auto', '1000000', 2023, 11 / 11 / 2023, 23455, 43453, 54545),
-  createData('bike', '1000000', 2023, 11 / 11 / 2023, 23455, 43453, 54545),
-  createData('Auto', '1000000', 2023, 11 / 11 / 2023, 23455, 43453, 54545),
-  createData('motor cycle', '1000000', 2023, 11 / 11 / 2023, 23455, 43453, 54545)
-]
+import Card from '@mui/material/Card'
+import CardMedia from '@mui/material/CardMedia'
+import Typography from '@mui/material/Typography'
+import CardContent from '@mui/material/CardContent'
+import Grid from '@mui/material/Grid'
+import DeleteIcon from '@mui/icons-material/Delete'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import EditIcon from '@mui/icons-material/Edit'
 
 const ProductsRecord = () => {
   // ** States
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
-
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
-  }
+  const columns = [
+    { title: 'motorcycle', img: '/images/img/cd70.jpg', price: '150000', stock: '10' },
+    { title: 'bike', img: '/images/img/cd701.png', price: '100000', stock: '20' },
+    {
+      title: 'auto',
+      img: '/images/img/rickshaw.jpg',
+      price: '250000',
+      stock: '10'
+    },
+    {
+      title: 'bike',
+      img: '/images/img/cd70.jpg',
+      price: '150000',
+      stock: '15'
+    },
+    {
+      title: 'motorcycle',
+      img: '/images/img/cd70.jpg',
+      price: '100000',
+      stock: '20'
+    },
+    {
+      title: 'loader',
+      img: '/images/img/loader.jpg',
+      price: '150000',
+      stock: '10'
+    },
+    {
+      title: 'auto',
+      img: '/images/img/loader.jpg',
+      price: '300000',
+      stock: '20'
+    }
+  ]
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label='user rocords'>
-          <TableHead>
-            <TableRow>
-              {columns.map(column => (
-                <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth }}>
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
-              return (
-                <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
-                  {columns.map(column => {
-                    const value = row[column.id]
-
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    )
-                  })}
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component='div'
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <Grid container spacing={3}>
+      {columns.map((item, index) => (
+        <Grid item xs={3} sx={{ Padding: 10 }}>
+          <Card>
+            <CardMedia sx={{ height: '14.5625rem' }} image={item.img} />
+            <CardContent>
+              <Typography variant='h6' sx={{ marginBottom: 2 }}>
+                <b>{item.title}</b>
+              </Typography>
+              <Typography>
+                <p className='text-default-500'>Price: {item.price}</p>
+              </Typography>
+              <Typography>
+                <p className='text-default-500'>Stock: {item.stock}</p>
+              </Typography>
+            </CardContent>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+              <Button>
+                <DeleteForeverIcon />
+              </Button>
+              <Button>
+                <EditIcon />
+              </Button>
+            </Box>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
   )
 }
 
