@@ -18,17 +18,22 @@ const navigation = () => {
       path: '/'
     },
 
-    {
-      sectionTitle: 'Pages'
-    },
+    // {
+    //   sectionTitle: 'Pages'
+    // },
 
-    {
-      sectionTitle: 'User Interface'
-    },
+    // {
+    //   sectionTitle: 'User Interface'
+    // },
     {
       title: 'User Records',
       icon: CreditCardOutline,
       path: '/userrecords'
+    },
+    {
+      title: 'Installment',
+      icon: CreditCardOutline,
+      path: '/installment'
     },
     {
       title: 'Products record',
@@ -54,6 +59,16 @@ const navigation = () => {
       icon: CubeOutline,
       title: 'Product Detail',
       path: '/product-detail'
+    },
+    {
+      icon: CubeOutline,
+      title: 'Company-Detail',
+      path: '/company-detail'
+    },
+    {
+      icon: Table,
+      title: 'Companies-Record',
+      path: '/companies-record'
     }
   ]
 }

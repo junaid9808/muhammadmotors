@@ -35,6 +35,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
+import { loginadmin } from 'src/ApiHits/ApiCalling'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -57,9 +58,10 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 const LoginPage = () => {
   // ** State
   const [values, setValues] = useState({
-    password: '',
-    showPassword: false
+    email: '',
+    password: ''
   })
+  const [showPassword, setShowPassword] = useState(false)
 
   // ** Hook
   const theme = useTheme()
@@ -70,11 +72,19 @@ const LoginPage = () => {
   }
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword })
+    setShowPassword({ ...values, showPassword: !showPassword })
   }
 
   const handleMouseDownPassword = event => {
     event.preventDefault()
+  }
+  const handlelogin = async () => {
+    const loginadminss = await loginadmin(values)
+
+    if (loginadminss) {
+      localStorage.setItem('token', loginadminss?.token)
+      router.push('/')
+    }
   }
 
   return (
@@ -122,7 +132,15 @@ const LoginPage = () => {
             <Typography variant='body2'>Please sign-in to your account</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
+            <TextField
+              onChange={handleChange('email')}
+              value={values.email}
+              autoFocus
+              fullWidth
+              id='email'
+              label='Email'
+              sx={{ marginBottom: 4 }}
+            />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
@@ -153,13 +171,7 @@ const LoginPage = () => {
                 <LinkStyled onClick={e => e.preventDefault()}>Forgot Password?</LinkStyled>
               </Link>
             </Box>
-            <Button
-              fullWidth
-              size='large'
-              variant='contained'
-              sx={{ marginBottom: 7 }}
-              onClick={() => router.push('/')}
-            >
+            <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={() => handlelogin()}>
               Login
             </Button>
           </form>

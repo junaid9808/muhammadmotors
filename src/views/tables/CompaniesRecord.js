@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // ** MUI Imports
 import Paper from '@mui/material/Paper'
@@ -14,52 +14,64 @@ import Button from '@mui/material/Button'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import Box from '@mui/material/Box'
-import { getUsersss } from 'src/ApiHits/newuser/NewUserCalling'
+import { useEffect } from 'react'
+import { getCompamies } from 'src/ApiHits/company/CompantCalling'
+import moment from 'moment/moment'
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'phoneNo', label: 'Phone No.', minWidth: 100 },
+  { id: 'companyName', label: 'Company Name', minWidth: 170 },
+  { id: 'productType', label: 'Product Type', minWidth: 170 },
   {
-    id: 'totelPayment',
-    label: 'Total Payment',
+    id: 'productPrice',
+    label: 'Product Price',
     minWidth: 170,
     align: 'right'
   },
   {
-    id: 'advance',
-    label: 'submitted payment',
+    id: 'serialNo',
+    label: 'Serial No',
     minWidth: 170,
     align: 'right'
   },
   {
-    id: 'dues',
-    label: 'Due/month',
+    id: 'quantity',
+    label: 'Quantity',
+    minWidth: 170,
+    align: 'right'
+  },
+
+  {
+    id: 'payment',
+    label: 'Payment',
     minWidth: 170,
     align: 'right'
   },
   {
-    id: 'motorcycleType',
-    label: 'motor type',
+    id: 'remainingPayment',
+    label: 'Remaining Payment',
+    minWidth: 170,
+    align: 'right'
+  },
+  {
+    id: 'createdAt',
+    label: 'Date',
     minWidth: 170,
     align: 'right'
   }
 ]
-function createData(name, phoneNo, totelPayment, advance, dues, motorcycleType) {
-  return { name, phoneNo, totelPayment, advance, dues, motorcycleType }
-}
 
-const TableStickyHeader = () => {
+const CompaniesRecord = () => {
   // ** States
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [data, setData] = useState([])
   useEffect(() => {
-    async function fetchData() {
-      let userData = await getUsersss()
-      console.log('new user', userData)
-      setData(userData)
+    async function fetchdata() {
+      let companyData = await getCompamies()
+      console.log('hasjhjssd', companyData)
+      setData(companyData)
     }
-    fetchData()
+    fetchdata()
   }, [])
 
   const handleChangePage = (event, newPage) => {
@@ -82,7 +94,7 @@ const TableStickyHeader = () => {
                   {column.label}
                 </TableCell>
               ))}
-              <TableCell>Achghgh</TableCell>
+              <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -91,6 +103,14 @@ const TableStickyHeader = () => {
                 <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
                   {columns.map(column => {
                     const value = row[column.id]
+
+                    let newdata
+                    if (column.id === 'createdAt') {
+                      newdata = moment(row['createdAt']).format('LLL')
+                    }
+                    if (newdata) {
+                      value = newdata
+                    }
 
                     return (
                       <TableCell key={column.id} align={column.align}>
@@ -102,8 +122,6 @@ const TableStickyHeader = () => {
                     <Box sx={{ display: 'flex' }}>
                       <Button>
                         <DeleteForeverIcon />
-                      </Button>
-                      <Button>
                         <EditIcon />
                       </Button>
                     </Box>
@@ -127,4 +145,4 @@ const TableStickyHeader = () => {
   )
 }
 
-export default TableStickyHeader
+export default CompaniesRecord
