@@ -84,64 +84,66 @@ const CompaniesRecord = () => {
   }
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label='user rocords'>
-          <TableHead>
-            <TableRow>
-              {columns.map(column => (
-                <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth }}>
-                  {column.label}
-                </TableCell>
-              ))}
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
-              return (
-                <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
-                  {columns.map(column => {
-                    const value = row[column.id]
-
-                    let newdata
-                    if (column.id === 'createdAt') {
-                      newdata = moment(row['createdAt']).format('LLL')
-                    }
-                    if (newdata) {
-                      value = newdata
-                    }
-
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    )
-                  })}
-                  <TableCell>
-                    <Box sx={{ display: 'flex' }}>
-                      <Button>
-                        <DeleteForeverIcon />
-                        <EditIcon />
-                      </Button>
-                    </Box>
+    <>
+      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label='user rocords'>
+            <TableHead>
+              <TableRow>
+                {columns.map(column => (
+                  <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth }}>
+                    {column.label}
                   </TableCell>
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component='div'
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+                ))}
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
+                return (
+                  <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
+                    {columns.map(column => {
+                      const value = row[column.id]
+
+                      let newdata
+                      if (column.id === 'createdAt') {
+                        newdata = moment(row['createdAt']).format('LLL')
+                      }
+                      if (newdata) {
+                        value = newdata
+                      }
+
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number' ? column.format(value) : value}
+                        </TableCell>
+                      )
+                    })}
+                    <TableCell>
+                      <Box sx={{ display: 'flex' }}>
+                        <Button>
+                          <DeleteForeverIcon />
+                          <EditIcon />
+                        </Button>
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component='div'
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+    </>
   )
 }
 

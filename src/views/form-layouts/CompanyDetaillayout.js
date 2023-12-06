@@ -12,12 +12,14 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import { addCompany } from 'src/ApiHits/company/CompantCalling'
+import { useRouter } from 'next/router'
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
 })
 
 const CompanyDetailLayout = () => {
+  const router = useRouter()
   // ** States
   const [language, setLanguage] = useState([])
   const [values, setValues] = useState({
@@ -36,7 +38,12 @@ const CompanyDetailLayout = () => {
 
   const addCompanyData = async () => {
     const addData = await addCompany(values)
-    console.log('data added succesfully', addData)
+    if (addData) {
+      console.log('data added succesfully', addData)
+      router.push('/companies-record/companies')
+    } else {
+      alert('add data')
+    }
   }
 
   return (

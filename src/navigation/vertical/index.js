@@ -60,11 +60,7 @@ const navigation = () => {
       title: 'Product Detail',
       path: '/product-detail'
     },
-    {
-      icon: CubeOutline,
-      title: 'Company-Detail',
-      path: '/company-detail'
-    },
+
     {
       icon: Table,
       title: 'Companies-Record',
