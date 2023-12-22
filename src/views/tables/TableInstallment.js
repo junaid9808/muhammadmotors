@@ -10,26 +10,14 @@ import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
+import moment from 'moment';
 
 const columns = [
   { id: 'serialNo', label: 'Serial No', minWidth: 170 },
   { id: 'installment', label: 'Installment', minWidth: 100 },
-  {
-    id: 'tillId',
-    label: 'Transaction Id',
-    minWidth: 170,
-    align: 'right'
-  },
-  {
-    id: 'createdAt',
-    label: 'Issue Date',
-    minWidth: 170,
-    align: 'right'
-  },
-]
-function createData(serialNo, installment, tillId, createdAt) {
-  return { serialNo, installment, tillId, createdAt }
-}
+  { id: 'tillId', label: 'Transaction Id', minWidth: 170, align: 'right' },
+  { id: 'createdAt', label: 'Issue Date', minWidth: 170, align: 'right' },
+];
 
 const TableInstallment = ({ userIdCardNumber }) => {
   const [page, setPage] = useState(0)
@@ -68,7 +56,7 @@ const handleChangePage = (event, newPage) => {
           <TableHead>
             <TableRow>
               {columns.map(column => (
-                <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth }}>
+                <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth}}>
                   {column.label}
                 </TableCell>
               ))}
@@ -79,13 +67,12 @@ const handleChangePage = (event, newPage) => {
               return (
                 <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
                   {columns.map(column => {
-                    const value = row[column.id]
-
+                    const value = column.id === 'createdAt' ? moment(row[column.id]).format('MMM Do YYYY, HH:MM:ss A') : row[column.id];
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                        {value}
                       </TableCell>
-                    )
+                    );
                   })}
                   <TableCell>
                     <Box sx={{ display: 'flex' }}>

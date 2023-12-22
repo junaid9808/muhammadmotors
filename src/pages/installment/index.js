@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -55,9 +55,10 @@ const LoginPage = () => {
     const min = 1000000
     const max = 9999999
     const randomEvenNumber = Math.floor(Math.random() * (max - min + 1)) + min
-    setValues({ ...values, tillId: randomEvenNumber })
+    const updateValues  = { ...values, tillId: randomEvenNumber }
+    setValues(updateValues)
     if (randomEvenNumber) {
-      const addInt = await addInstallment(values)
+      const addInt = await addInstallment(updateValues)
       if (addInt) {
         setReceiptdata(addInt)
       }
