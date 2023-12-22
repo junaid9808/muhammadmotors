@@ -85,69 +85,71 @@ const TableStickyHeader = () => {
 
   return (
     <>
-    {showUserDetails?(
-                  // <UserDetailLayout userData={selectedUser} setShowUserDetails={setShowUserDetails} showUserDetails={showUserDetails} />
-                  <TableInstallment userIdCardNumber={selectedUser.idCradNumber} />
+      {showUserDetails ? (
+        // <UserDetailLayout userData={selectedUser} setShowUserDetails={setShowUserDetails} showUserDetails={showUserDetails} />
+        <TableInstallment userIdCardNumber={selectedUser.idCradNumber} />
 
-  ):(
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label='user rocords'>
-          <TableHead>
-            <TableRow>
-              {columns.map(column => (
-                <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth }}>
-                  {column.label}
-                </TableCell>
-              ))}
-              <TableCell>Delete user</TableCell>
-              <TableCell>Edit Details</TableCell>
-              <TableCell>See Details</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
-              return (
-                <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
-                  {columns.map(column => {
-                    const value = row[column.id]
-
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    )
-                  })}
-                  <TableCell>
-                    <Box sx={{ display: 'flex' }}>
-                      <Button>
-                        <DeleteForeverIcon />
-                      </Button>
-                      <Button>
-                        <EditIcon />
-                      </Button>
-                      <Button onClick={()=>{userDetails(row)}}>
-                        <ArrowForwardIcon />
-                      </Button>
-                    </Box>
-                  </TableCell>
+      ) : (
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label='user rocords'>
+              <TableHead>
+                <TableRow>
+                  {columns.map(column => (
+                    <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth }}>
+                      {column.label}
+                    </TableCell>
+                  ))}
+                  <TableCell>Delete user</TableCell>
+                  <TableCell>Edit Details</TableCell>
+                  <TableCell>See Details</TableCell>
                 </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component='div'
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>  
-  )
+              </TableHead>
+              <TableBody>
+                {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
+                  return (
+                    <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
+                      {columns.map(column => {
+                        const value = row[column.id]
+
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                          </TableCell>
+                        )
+                      })}
+                      <TableCell>
+                        <Button onClick={() => {  }}>
+                          <DeleteForeverIcon />
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button onClick={() => {  }}>
+                          <EditIcon />
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button onClick={() => { userDetails(row) }}>
+                          <ArrowForwardIcon />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component='div'
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      )
       }
     </>
   )
