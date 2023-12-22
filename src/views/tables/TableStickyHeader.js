@@ -15,6 +15,10 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import Box from '@mui/material/Box'
 import { getUsersss } from 'src/ApiHits/newuser/NewUserCalling'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useRouter } from 'next/router';
+import UserDetailLayout from '../form-layouts/UserDetailLayout'
+import TableInstallment from './TableInstallment'
 
 
 const columns = [
@@ -48,12 +52,14 @@ const columns = [
 function createData(name, phoneNo, totelPayment, advance, dues, motorcycleType) {
   return { name, phoneNo, totelPayment, advance, dues, motorcycleType }
 }
-
 const TableStickyHeader = () => {
+  const router = useRouter();
   // ** States
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [data, setData] = useState([])
+  const [selectedUser, setSelectedUser] = useState(null); // Store the selected user details here
+  const [showUserDetails, setShowUserDetails] = useState(false);
   useEffect(() => {
     async function fetchData() {
       let userData = await getUsersss()
@@ -71,8 +77,19 @@ const TableStickyHeader = () => {
     setRowsPerPage(+event.target.value)
     setPage(0)
   }
+  const userDetails = (rowData) => {
+    console.log('Clicked row data:', rowData);
+    setSelectedUser(rowData); // Store the selected user details
+    setShowUserDetails(true); // Show the UserDetailLayout component
+  }
 
   return (
+    <>
+    {showUserDetails?(
+                  // <UserDetailLayout userData={selectedUser} setShowUserDetails={setShowUserDetails} showUserDetails={showUserDetails} />
+                  <TableInstallment userIdCardNumber={selectedUser.idCradNumber} />
+
+  ):(
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label='user rocords'>
@@ -83,7 +100,9 @@ const TableStickyHeader = () => {
                   {column.label}
                 </TableCell>
               ))}
-              <TableCell>Achghgh</TableCell>
+              <TableCell>Delete user</TableCell>
+              <TableCell>Edit Details</TableCell>
+              <TableCell>See Details</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -107,6 +126,9 @@ const TableStickyHeader = () => {
                       <Button>
                         <EditIcon />
                       </Button>
+                      <Button onClick={()=>{userDetails(row)}}>
+                        <ArrowForwardIcon />
+                      </Button>
                     </Box>
                   </TableCell>
                 </TableRow>
@@ -124,7 +146,10 @@ const TableStickyHeader = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </Paper>  
+  )
+      }
+    </>
   )
 }
 

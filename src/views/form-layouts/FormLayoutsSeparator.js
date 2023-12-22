@@ -26,6 +26,7 @@ import DatePicker from 'react-datepicker'
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 import { addNewuser } from 'src/ApiHits/newuser/NewUserCalling'
+import { useRouter } from 'next/router'
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
@@ -35,6 +36,7 @@ const FormLayoutsSeparator = () => {
   // ** States
   const [language, setLanguage] = useState([])
   const [date, setDate] = useState(null)
+  const router = useRouter();
 
   const [values, setValues] = useState({
     totelPayment: '',
@@ -66,6 +68,7 @@ const FormLayoutsSeparator = () => {
   const addNewUser = async () => {
     const addData = await addNewuser(values)
     console.log('dataaaaaaaaa', addData)
+    router.push('/userrecords/')
   }
 
   return (

@@ -1,15 +1,16 @@
 import connectMongo from 'src/backend/utils/connectMongo'
 import InstallmentReciept from 'src/backend/model/installmentreciept/installmentReciept'
 
-export default async function installment(req, res) {
+
+export default async function getInstallments(req, res) {
   try {
     await connectMongo()
     console.log('connected')
     if (req.method === 'POST') {
-      let installment = new InstallmentReciept(req.body)
-      await installment.save()
-      console.log('added', installment)
-      res.status(200).json(installment)
+      const byIdCardInstallments = 
+      await InstallmentReciept.find({serialNo:req.body.serialNo})
+      console.log('id card number', byIdCardInstallments)
+      res.status(200).json(byIdCardInstallments)
     }
   } catch (error) {
     res.status(500).json(error)
