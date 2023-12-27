@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import moment from 'moment';
-
+import { ArrowBackIosNew } from '@mui/icons-material'
 const columns = [
   { id: 'serialNo', label: 'Serial No', minWidth: 170 },
   { id: 'installment', label: 'Installment', minWidth: 100 },
@@ -76,9 +76,9 @@ const handleChangePage = (event, newPage) => {
                   })}
                   <TableCell>
                     <Box sx={{ display: 'flex' }}>
-                      {/* <Button onClick={()=>{userDetails(row)}}> 
-                        <ArrowForwardIcon />
-                      </Button> */}
+                      <Button onClick={()=>{userDetails(row)}}> 
+                        <ArrowBackIosNew />
+                      </Button> 
                     </Box>
                   </TableCell>
                 </TableRow>
