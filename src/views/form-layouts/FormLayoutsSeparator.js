@@ -76,7 +76,7 @@ const FormLayoutsSeparator = () => {
   const addNewUser = async () => {
     const addData = await addNewuser(values)
     console.log('dataaaaaaaaa', addData)
-    // router.push('/userrecords/')
+    router.push('/userrecords/')
   }
 
   return (

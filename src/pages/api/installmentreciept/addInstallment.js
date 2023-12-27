@@ -9,8 +9,8 @@ export default async function installment(req, res) {
     if (req.method === 'POST') {
       let installment = new InstallmentReciept(req.body)
       let updateDues = await newUser.findOne({idCradNumber:req.body.serialNo});
-      updateDues.paidDues = updateDues.paidDues + installment.installment;
-      updateDues.dues = updateDues.dues - installment.installment;
+      updateDues.paidDues += installment.installment;
+      updateDues.dues -= installment.installment;
       await updateDues.save()
       await installment.save()
       // console.log('added', installment)
