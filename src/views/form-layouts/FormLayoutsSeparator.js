@@ -42,6 +42,7 @@ const FormLayoutsSeparator = () => {
     totelPayment: '',
     advance: '',
     dues: '',
+    paidDues: '',
     date: '',
     name: '',
     address: '',
@@ -61,14 +62,21 @@ const FormLayoutsSeparator = () => {
     color: ''
   })
 
-  // Handle Password
   const handleChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value })
-  }
+    const { value } = event.target;
+  
+    if (prop === 'advance') {
+      if (value !== undefined) {
+        setValues({ ...values, [prop]: value, paidDues: value });
+      }
+    } else {
+      setValues({ ...values, [prop]: value });
+    }
+  };
   const addNewUser = async () => {
     const addData = await addNewuser(values)
     console.log('dataaaaaaaaa', addData)
-    router.push('/userrecords/')
+    // router.push('/userrecords/')
   }
 
   return (

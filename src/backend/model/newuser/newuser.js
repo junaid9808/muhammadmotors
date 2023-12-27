@@ -4,6 +4,7 @@ const userSchema = mongoose.Schema({
   totelPayment: 'String',
   advance: 'String',
   dues: 'String',
+  paidDues: 'String',
   date: 'String',
   name: 'String',
   address: 'String',

@@ -31,7 +31,7 @@ const columns = [
     align: 'right'
   },
   {
-    id: 'advance',
+    id: 'paidDues',
     label: 'submitted payment',
     minWidth: 170,
     align: 'right'
@@ -49,8 +49,8 @@ const columns = [
     align: 'right'
   }
 ]
-function createData(name, phoneNo, totelPayment, advance, dues, motorcycleType) {
-  return { name, phoneNo, totelPayment, advance, dues, motorcycleType }
+function createData(name, phoneNo, totelPayment, paidDues, dues, motorcycleType) {
+  return { name, phoneNo, totelPayment, paidDues, dues, motorcycleType }
 }
 const TableStickyHeader = () => {
   const router = useRouter();
