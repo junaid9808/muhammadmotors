@@ -9,7 +9,7 @@ import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
 import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
 import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
-
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 const navigation = () => {
   return [
     {
@@ -63,8 +63,14 @@ const navigation = () => {
 
     {
       icon: Table,
-      title: 'Companies-Record',
+      title: 'Companies Record',
       path: '/companies-record'
+    },
+
+    {
+      icon: CurrencyExchangeIcon,
+      title: 'Profit',
+      path: '/profit'
     }
   ]
 }
