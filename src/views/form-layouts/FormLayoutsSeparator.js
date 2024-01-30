@@ -43,6 +43,8 @@ const FormLayoutsSeparator = () => {
     advance: '',
     dues: '',
     paidDues: '',
+    paymentPlan:'',
+    interestRatePerMonth:'',
     date: '',
     name: '',
     address: '',
@@ -114,6 +116,12 @@ const FormLayoutsSeparator = () => {
                 onChange={handleChange('date')}
                 placeholder='12345'
               />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField fullWidth type='text' label='Payment Plan Per Month' onChange={handleChange('paymentPlan')} placeholder='12345'/>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField fullWidth type='text' label='Interest Rate Per Month' onChange={handleChange('interestRatePerMonth')} placeholder='3.5%' />
             </Grid>
 
             <Grid item xs={12}>

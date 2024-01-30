@@ -69,8 +69,8 @@ const navigation = () => {
 
     {
       icon: CurrencyExchangeIcon,
-      title: 'Profit',
-      path: '/profit'
+      title: 'Revenue',
+      path: '/revenue'
     }
   ]
 }

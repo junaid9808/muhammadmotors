@@ -5,6 +5,8 @@ const userSchema = mongoose.Schema({
   advance: 'String',
   dues: 'String',
   paidDues: 'String',
+  paymentPlan: 'String',
+  interestRatePerMonth: 'String',
   date: 'String',
   name: 'String',
   address: 'String',
