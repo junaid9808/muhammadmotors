@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -12,24 +13,25 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 import Button from '@mui/material/Button'
+import { getIncome } from 'src/ApiHits/revenue/getIncome';
 import moment from 'moment';
-import { useState, useEffect } from 'react';
+import { ArrowBackIosNew } from '@mui/icons-material';
 
 const columns = [
-    { id: 'serialNo', label: 'Customer Name', minWidth: 170 },
-    { id: 'installment', label: 'Installment', minWidth: 100 },
+    { id: 'name', label: 'Customer Name', minWidth: 170 },
+    { id: 'installmentAmount', label: 'Installment', minWidth: 100 },
     { id: 'tillId', label: 'Transaction Id', minWidth: 170, align: 'right' },
-    { id: 'createdAt', label: 'Issue Date', minWidth: 170, align: 'right' },
+    { id: 'createdAt', label: 'Paid Date', minWidth: 170, align: 'right' },
   ];
 
 export default function IncomeTable() {
-  const [income, setIncome] = useState(' ')
+  const [days, setDays] = useState(1)
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [data, setData] = useState([])
 
   const handleChange = (event) => {
-    setIncome(event.target.value);
+    setDays(event.target.value);
   };
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -39,6 +41,21 @@ export default function IncomeTable() {
     setRowsPerPage(+event.target.value)
     setPage(0)
   }
+  useEffect(() => {
+
+    const fetchData = async () => {
+      try {
+        if (!days) return;
+        const data = await getIncome(days);
+        setData(data);
+        console.log("data is here",data)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [days]);
 
   return (
     <>
@@ -48,8 +65,8 @@ export default function IncomeTable() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={income}
-          label="income"
+          value={days}
+          label="days"
           onChange={handleChange}
           sx={{ minWidth: '500px' }}
           >
@@ -76,20 +93,14 @@ export default function IncomeTable() {
               return (
                 <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
                   {columns.map(column => {
-                    const value = column.id === 'createdAt' ? moment(row[column.id]).format('MMM Do YYYY, HH:MM:ss A') : row[column.id];
+                    const value = column.id === 'createdAt' ? moment.utc(row[column.id]).format('MMM Do YYYY, hh:mm:ss A') : row[column.id];
+                    console.log("Date is here",value)
                     return (
                       <TableCell key={column.id} align={column.align}>
                         {value}
                       </TableCell>
                     );
                   })}
-                  <TableCell>
-                    <Box sx={{ display: 'flex' }}>
-                      <Button onClick={()=>{userDetails(row)}}> 
-                        <ArrowBackIosNew />
-                      </Button> 
-                    </Box>
-                  </TableCell>
                 </TableRow>
               )
             })}

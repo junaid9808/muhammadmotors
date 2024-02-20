@@ -9,7 +9,6 @@ export default async function getInstallments(req, res) {
     if (req.method === 'POST') {
       const byIdCardInstallments = 
       await InstallmentReciept.find({serialNo:req.body.serialNo})
-      console.log('id card number', byIdCardInstallments)
       res.status(200).json(byIdCardInstallments)
     }
   } catch (error) {
