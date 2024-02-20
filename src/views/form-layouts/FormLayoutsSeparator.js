@@ -18,6 +18,7 @@ import FormControl from '@mui/material/FormControl'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import Select from '@mui/material/Select'
+import {LoginPage} from 'src/pages/installment'
 
 // ** Third Party Imports
 import DatePicker from 'react-datepicker'
@@ -78,6 +79,7 @@ const FormLayoutsSeparator = () => {
   const addNewUser = async () => {
     const addData = await addNewuser(values)
     console.log('dataaaaaaaaa', addData)
+
     router.push('/userrecords/')
   }
 

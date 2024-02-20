@@ -55,7 +55,7 @@ const LoginPage = () => {
     const min = 1000000
     const max = 9999999
     const randomEvenNumber = Math.floor(Math.random() * (max - min + 1)) + min
-    const updateValues  = { ...values, tillId: randomEvenNumber }
+    const updateValues = { ...values, tillId: randomEvenNumber }
     setValues(updateValues)
     if (randomEvenNumber) {
       const addInt = await addInstallment(updateValues)

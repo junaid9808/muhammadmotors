@@ -1,12 +1,12 @@
 import mongoose from 'mongoose'
 
 const userSchema = mongoose.Schema({
-  totelPayment: 'String',
-  advance: 'String',
-  dues: 'String',
-  paidDues: 'String',
-  paymentPlan: 'String',
-  interestRatePerMonth: 'String',
+  totelPayment: 'Number',
+  advance: 'Number',
+  dues: 'Number',
+  paidDues: 'Number',
+  paymentPlan: 'Number',
+  interestRatePerMonth: 'Number',
   date: 'String',
   name: 'String',
   address: 'String',

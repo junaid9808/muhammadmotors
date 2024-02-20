@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 const recieptSchema = mongoose.Schema(
   {
     serialNo: 'String',
-    installment: 'String',
+    installment: 'Number',
     tillId: 'String'
   },
   { timestamps: true }

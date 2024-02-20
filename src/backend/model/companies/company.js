@@ -4,11 +4,11 @@ const companySchema = mongoose.Schema(
   {
     companyName: 'String',
     productType: 'String',
-    productPrice: 'String',
+    productPrice: 'Number',
     serialNo: 'String',
-    quantity: 'String',
-    payment: 'String',
-    remainingPayment: 'String'
+    quantity: 'Number',
+    payment: 'Number',
+    remainingPayment: 'Number'
   },
   { timestamps: true }
 )
