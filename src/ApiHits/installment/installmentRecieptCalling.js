@@ -9,8 +9,10 @@ export async function addInstallment(values) {
       },
       body: JSON.stringify(values)
     })
+    console.log('response', res)
     if (res.ok) {
       const data = await res.json()
+      console.log('fetch', data)
       return data
     } else {
       console.error('Error', res.statusText)

@@ -4,20 +4,12 @@ const mongoose = require('mongoose')
 
 export default async function deleteProduct(req, res) {
   try {
-    console.log('Request URL:', req.url)
-    console.log('Request Params:', req.params)
-    console.log('Request Query:', req.query)
-    // Establish MongoDB connection
     await connectMongo()
     console.log('connected')
 
     if (req.method === 'DELETE') {
-      const {
-        query: { id }
-      } = req
-      console.log('id', id)
-
-      // Use the ID from the URL path to delete the product
+      const { id } = req.query
+      console.log('fghhjg', id)
       const deletedProduct = await Product.findByIdAndDelete(id)
 
       if (!deletedProduct) {

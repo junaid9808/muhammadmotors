@@ -3,8 +3,8 @@ import connectMongo from 'src/backend/utils/connectMongo'
 
 export default async function handler(req, res) {
   try {
-    await connectMongo()
-    console.log('connected')
+    const connected = await connectMongo()
+    console.log('connecteddddd', connected.connection)
     if (req.method === 'POST') {
       let product = new Product(req.body)
       await product.save()

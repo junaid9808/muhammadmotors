@@ -39,3 +39,23 @@ export async function getCompamies() {
     console.error('network error', error)
   }
 }
+export async function companyDelete(id) {
+  try {
+    const response = await fetch(`${baseUrl}/api/company/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    if (response.ok) {
+      const res = await response.json()
+      console.log('dataaaaaaa', res)
+      return res
+    } else {
+      console.error('Error', response.statusText)
+    }
+  } catch (error) {
+    console.error('network error', error)
+  }
+}

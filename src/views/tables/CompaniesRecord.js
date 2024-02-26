@@ -17,46 +17,47 @@ import Box from '@mui/material/Box'
 import { useEffect } from 'react'
 import { getCompamies } from 'src/ApiHits/company/CompantCalling'
 import moment from 'moment/moment'
+import { companyDelete } from 'src/ApiHits/company/CompantCalling'
 
 const columns = [
-  { id: 'companyName', label: 'Company Name', minWidth: 170 },
-  { id: 'productType', label: 'Product Type', minWidth: 170 },
+  { id: 'companyName', label: 'Company Name', minWidth: 170, align: 'center' },
+  { id: 'productType', label: 'Product Type', minWidth: 170, align: 'center' },
   {
     id: 'productPrice',
     label: 'Product Price',
     minWidth: 170,
-    align: 'right'
+    align: 'center'
   },
   {
     id: 'serialNo',
     label: 'Serial No',
     minWidth: 170,
-    align: 'right'
+    align: 'center'
   },
   {
     id: 'quantity',
     label: 'Quantity',
     minWidth: 170,
-    align: 'right'
+    align: 'center'
   },
 
   {
     id: 'payment',
     label: 'Payment',
     minWidth: 170,
-    align: 'right'
+    align: 'center'
   },
   {
     id: 'remainingPayment',
     label: 'Remaining Payment',
     minWidth: 170,
-    align: 'right'
+    align: 'center'
   },
   {
     id: 'createdAt',
     label: 'Date',
     minWidth: 170,
-    align: 'right'
+    align: 'center'
   }
 ]
 
@@ -65,6 +66,7 @@ const CompaniesRecord = () => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [data, setData] = useState([])
+  const [deltee, setDeletee] = useState()
   useEffect(() => {
     async function fetchdata() {
       let companyData = await getCompamies()
@@ -72,7 +74,7 @@ const CompaniesRecord = () => {
       setData(companyData)
     }
     fetchdata()
-  }, [])
+  }, [deltee])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -81,6 +83,16 @@ const CompaniesRecord = () => {
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value)
     setPage(0)
+  }
+
+  const deletee = async id => {
+    try {
+      console.log('id', id)
+      const deleteData = await companyDelete(id)
+      setDeletee(deleteData)
+    } catch (error) {
+      console.error('error deleting company', error)
+    }
   }
 
   return (
@@ -95,7 +107,7 @@ const CompaniesRecord = () => {
                     {column.label}
                   </TableCell>
                 ))}
-                <TableCell>Action</TableCell>
+                <TableCell align='center'>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -121,8 +133,10 @@ const CompaniesRecord = () => {
                     })}
                     <TableCell>
                       <Box sx={{ display: 'flex' }}>
-                        <Button>
+                        <Button className='bg-blue-500' onClick={() => deletee(row._id)}>
                           <DeleteForeverIcon />
+                        </Button>
+                        <Button>
                           <EditIcon />
                         </Button>
                       </Box>

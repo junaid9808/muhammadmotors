@@ -3,13 +3,10 @@ import Login from 'mdi-material-ui/Login'
 import Table from 'mdi-material-ui/Table'
 import CubeOutline from 'mdi-material-ui/CubeOutline'
 import HomeOutline from 'mdi-material-ui/HomeOutline'
-import FormatLetterCase from 'mdi-material-ui/FormatLetterCase'
-import AccountCogOutline from 'mdi-material-ui/AccountCogOutline'
+
 import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
-import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
-import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
-import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 const navigation = () => {
   return [
     {
@@ -64,9 +61,13 @@ const navigation = () => {
     {
       icon: Table,
       title: 'Companies Record',
-      path: '/companies-record'
+      path: '/companies-record/companies'
     },
-
+    {
+      icon: CubeOutline,
+      title: 'Companies Detail',
+      path: '/company-detail/company'
+    },
     {
       icon: CurrencyExchangeIcon,
       title: 'Revenue',

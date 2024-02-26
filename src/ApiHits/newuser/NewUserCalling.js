@@ -38,3 +38,22 @@ export async function getUsersss() {
     console.error('network error', error)
   }
 }
+export async function userrDelete(id) {
+  try {
+    const response = await fetch(`${baseUrl}/api/newuser/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    if (response.ok) {
+      const data = await response.json()
+      console.log('delete user', data)
+    } else {
+      console.error('Error', response.statusText)
+    }
+  } catch (error) {
+    console.error('network error', error)
+  }
+}

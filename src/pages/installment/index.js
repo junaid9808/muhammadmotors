@@ -8,19 +8,15 @@ import { useRouter } from 'next/router'
 // ** MUI Components
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
-import Checkbox from '@mui/material/Checkbox'
+
 import TextField from '@mui/material/TextField'
-import InputLabel from '@mui/material/InputLabel'
+
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
+
 import CardContent from '@mui/material/CardContent'
-import FormControl from '@mui/material/FormControl'
-import OutlinedInput from '@mui/material/OutlinedInput'
+
 import { styled, useTheme } from '@mui/material/styles'
 import MuiCard from '@mui/material/Card'
-import Avatar from '@mui/material/Avatar'
-import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 
 // ** Icons Imports
 

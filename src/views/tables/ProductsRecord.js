@@ -14,24 +14,34 @@ import Button from '@mui/material/Button'
 import EditIcon from '@mui/icons-material/Edit'
 import { productList } from 'src/ApiHits/product/ProductCalling'
 import { useEffect } from 'react'
+import { deleteProduct } from 'src/ApiHits/product/ProductCalling'
 
 const ProductsRecord = () => {
   const [data, setdata] = useState([])
+  const [deleteData, setDeleteData] = useState()
   useEffect(() => {
     async function fectdata() {
       let dataproducts = await productList()
+      console.log('get dataaaaaaa', dataproducts)
       setdata(dataproducts)
     }
     fectdata()
-  }, [])
+  }, [deleteData])
 
-  // ** States
-  // console.log('3232', productList)
+  const deleteProducts = async id => {
+    try {
+      console.log('hjgdhjasd', id)
+      const deletePro = await deleteProduct(id)
+      setDeleteData(deletePro)
+    } catch (error) {
+      console.error('error deleting product', error)
+    }
+  }
   return (
     <>
       <Grid container spacing={3}>
         {data?.map((item, index) => (
-          <Grid item xs={4} sx={{ Padding: 10, height: '30rem' }}>
+          <Grid item xs={4} key={item.id} sx={{ Padding: 10, height: '30rem' }}>
             <Card>
               <CardMedia
                 sx={{ height: '14.5625rem' }}
@@ -51,7 +61,7 @@ const ProductsRecord = () => {
                 </Typography>
               </CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                <Button>
+                <Button onClick={() => deleteProducts(item._id)}>
                   <DeleteForeverIcon />
                 </Button>
                 <Button>

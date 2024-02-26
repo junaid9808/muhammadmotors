@@ -15,11 +15,11 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import Box from '@mui/material/Box'
 import { getUsersss } from 'src/ApiHits/newuser/NewUserCalling'
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useRouter } from 'next/router';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import { useRouter } from 'next/router'
 import UserDetailLayout from '../form-layouts/UserDetailLayout'
 import TableInstallment from './TableInstallment'
-
+import { userrDelete } from 'src/ApiHits/newuser/NewUserCalling'
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170 },
@@ -53,13 +53,14 @@ function createData(name, phoneNo, totelPayment, paidDues, dues, motorcycleType)
   return { name, phoneNo, totelPayment, paidDues, dues, motorcycleType }
 }
 const TableStickyHeader = () => {
-  const router = useRouter();
+  const router = useRouter()
   // ** States
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [data, setData] = useState([])
-  const [selectedUser, setSelectedUser] = useState(null); // Store the selected user details here
-  const [showUserDetails, setShowUserDetails] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null) // Store the selected user details here
+  const [showUserDetails, setShowUserDetails] = useState(false)
+  const [deleteUsers, setDeleteUsers] = useState()
   useEffect(() => {
     async function fetchData() {
       let userData = await getUsersss()
@@ -67,7 +68,7 @@ const TableStickyHeader = () => {
       setData(userData)
     }
     fetchData()
-  }, [])
+  }, [deleteUsers])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -77,10 +78,14 @@ const TableStickyHeader = () => {
     setRowsPerPage(+event.target.value)
     setPage(0)
   }
-  const userDetails = (rowData) => {
-    console.log('Clicked row data:', rowData);
-    setSelectedUser(rowData); // Store the selected user details
-    setShowUserDetails(true); // Show the UserDetailLayout component
+  const userDetails = rowData => {
+    console.log('Clicked row data:', rowData)
+    setSelectedUser(rowData) // Store the selected user details
+    setShowUserDetails(true) // Show the UserDetailLayout component
+  }
+  const deleteUser = async id => {
+    const data = await userrDelete(id)
+    setDeleteUsers(data)
   }
 
   return (
@@ -88,7 +93,6 @@ const TableStickyHeader = () => {
       {showUserDetails ? (
         // <UserDetailLayout userData={selectedUser} setShowUserDetails={setShowUserDetails} showUserDetails={showUserDetails} />
         <TableInstallment userIdCardNumber={selectedUser.idCradNumber} />
-
       ) : (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
@@ -119,17 +123,21 @@ const TableStickyHeader = () => {
                         )
                       })}
                       <TableCell>
-                        <Button onClick={() => {  }}>
+                        <Button onClick={() => deleteUser(row._id)}>
                           <DeleteForeverIcon />
                         </Button>
                       </TableCell>
                       <TableCell>
-                        <Button onClick={() => {  }}>
+                        <Button onClick={() => {}}>
                           <EditIcon />
                         </Button>
                       </TableCell>
                       <TableCell>
-                        <Button onClick={() => { userDetails(row) }}>
+                        <Button
+                          onClick={() => {
+                            userDetails(row)
+                          }}
+                        >
                           <ArrowForwardIcon />
                         </Button>
                       </TableCell>
@@ -149,8 +157,7 @@ const TableStickyHeader = () => {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-      )
-      }
+      )}
     </>
   )
 }

@@ -7,6 +7,7 @@ export default async function products(req, res) {
     console.log('connected')
     if (req.method === 'GET') {
       const product = await Product.find()
+      console.log('reqqqqqqq', product)
       res.status(200).json(product)
     }
   } catch (error) {

@@ -26,7 +26,7 @@ export async function addproductsss(values) {
 }
 export async function productList() {
   try {
-    const response = await fetch(`${baseUrl}/api/product/getproduct`, {
+    const response = await fetch(`${baseUrl}/api/product/getproduct/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -45,14 +45,24 @@ export async function productList() {
     console.error('network error', error)
   }
 }
-
-// export const getproductdetail = () => {
-//   axios
-//     .get(`${baseUrl}/api/product/getproduct`)
-//     .then(function (response) {
-//       return response.data
-//     })
-//     .catch(function (error) {
-//       console.log('errorr', error)
-//     })
-// }
+export async function deleteProduct(id) {
+  try {
+    console.log('get id', id)
+    const response = await fetch(`${baseUrl}/api/product/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    if (response.ok) {
+      const data = await response.json()
+      console.log('delete data', data)
+      return data
+    } else {
+      console.error('Error', response.statusText)
+    }
+  } catch (error) {
+    console.log('network error', error)
+  }
+}
